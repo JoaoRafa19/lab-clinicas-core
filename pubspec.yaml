@@ -10,6 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  signals_flutter: ^3.0.0
+  top_snackbar_flutter: ^3.1.0
 
 dev_dependencies:
   flutter_test:
