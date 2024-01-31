@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:signals_flutter/signals_flutter.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
@@ -22,5 +23,58 @@ final class Messages {
       Overlay.of(context),
       CustomSnackBar.success(message: message),
     );
+  }
+}
+
+mixin MessageStateMixin {
+  final Signal<String?> _errorMessage = signal(null);
+  String? get errorMessage => _errorMessage();
+
+  final Signal<String?> _infoMessage = signal(null);
+  String? get infoMessage => _infoMessage();
+
+  final Signal<String?> _successMessage = signal(null);
+  String? get successMessage => _successMessage();
+
+  void clearerror() => _errorMessage.value = null;
+  void clearinfo() => _infoMessage.value = null;
+  void clearsuccess() => _successMessage.value = null;
+
+  void showError(String message) {
+    untracked(() => clearerror());
+    _errorMessage.value = message;
+  }
+
+  void showInfo(String message) {
+    untracked(() => clearinfo());
+    _infoMessage.value = message;
+  }
+
+  void showSucess(String message) {
+    untracked(() => clearsuccess());
+    _errorMessage.value = message;
+  }
+
+  void clearAllMessages() {
+    untracked(() {
+      clearinfo();
+      clearerror();
+      clearsuccess();
+    });
+  }
+}
+
+mixin MessageViewMixin<T extends StatefulWidget> on State {
+  void messageListener(MessageStateMixin state) {
+    effect(() {
+      switch (state) {
+        case MessageStateMixin(:final errorMessage?):
+          Messages.showError(errorMessage, context);
+        case MessageStateMixin(:final infoMessage?):
+          Messages.showInfo(infoMessage, context);
+        case MessageStateMixin(:final successMessage?):
+          Messages.showInfo(successMessage, context);
+      }
+    });
   }
 }
