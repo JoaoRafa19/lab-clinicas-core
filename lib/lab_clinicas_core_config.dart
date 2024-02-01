@@ -1,3 +1,5 @@
+import 'package:asyncstate/asyncstate.dart';
+import 'package:fe_lab_clinicas_core/src/loader/lab_clinicas_loader.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_getit/flutter_getit.dart';
@@ -25,12 +27,18 @@ class LabClinicasCoreConfig extends StatelessWidget {
       pages: [...pages ?? [], ...pageBuilders ?? []],
       modules: [...modules ?? []],
       builder: (context, routes, flutterGetItNavObserver) {
-        return MaterialApp(
-          title: title,
-          routes: routes,
-          navigatorObservers: [
-            flutterGetItNavObserver,
-          ],
+        return AsyncStateBuilder(
+          loader: LabClinicasLoader(),
+          builder: (navigationObserver) {
+            return MaterialApp(
+              title: title,
+              routes: routes,
+              navigatorObservers: [
+                flutterGetItNavObserver,
+                navigationObserver,
+              ],
+            );
+          },
         );
       },
     );
