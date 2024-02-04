@@ -7,7 +7,7 @@ import 'package:flutter_getit/flutter_getit.dart';
 class LabClinicasCoreConfig extends StatelessWidget {
   const LabClinicasCoreConfig({
     super.key,
-    this.bindings,
+    this.binding,
     this.pages,
     this.pageBuilders,
     this.modules,
@@ -16,14 +16,14 @@ class LabClinicasCoreConfig extends StatelessWidget {
 
   final List<FlutterGetItPageRouter>? pages;
   final List<FlutterGetItPageBuilder>? pageBuilders;
-  final ApplicationBindings? bindings;
+  final ApplicationBindings? binding;
   final List<FlutterGetItModule>? modules;
   final String title;
   @override
   Widget build(BuildContext context) {
     return FlutterGetIt(
       debugMode: kDebugMode,
-      bindings: bindings,
+      bindings: binding,
       pages: [...pages ?? [], ...pageBuilders ?? []],
       modules: [...modules ?? []],
       builder: (context, routes, flutterGetItNavObserver) {
