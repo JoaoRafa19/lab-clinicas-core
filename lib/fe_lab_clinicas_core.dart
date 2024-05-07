@@ -10,3 +10,6 @@ export 'src/constants/local_storage_constants.dart';
 export 'src/exceptions/auth_exception.dart';
 export 'src/exceptions/repository_exception.dart';
 export 'src/exceptions/service_exception.dart';
+export 'src/theme/lab_clinicas_theme.dart';
+export 'src/widgets/lab_clinicas_app_bar.dart';
+export 'src/widgets/icon_pop_up_menu_widget.dart';

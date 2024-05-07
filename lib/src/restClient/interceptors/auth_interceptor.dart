@@ -16,7 +16,7 @@ final class AuthInterceptor extends Interceptor {
             'Bearer ${sp.getString(LocalStorageConstants.accessToken)}'
       });
     }
-    handler.next(options);
+
     super.onRequest(options, handler);
   }
 }
