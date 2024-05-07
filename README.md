@@ -2,7 +2,7 @@
 
 ## Descrição
 
-    - Pacote que contém as regras de negócio da aplicação.
+    - Pacote que contém as regras para trabalhar com programação funcional com Eithers.
 
 ## Funcionalidades
 
